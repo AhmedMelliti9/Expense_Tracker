@@ -71,7 +71,10 @@ function App() {
 
           <ExpenseList
             expenses={visibleExpenses}
+            totalExpensesCount={expenses.length}
+            selectedCategory={selectedCategory}
             onDeleteExpense={handleDeleteExpense}
+            onClearFilter={() => setSelectedCategory('All')}
           />
         </main>
       </div>
