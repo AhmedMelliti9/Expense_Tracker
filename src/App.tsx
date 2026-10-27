@@ -1,6 +1,23 @@
-import { ExpenseForm } from './components/ExpenseForm';
+import { useState } from 'react';
+import type { Expense } from './types/expense';
+import { ExpenseForm, type ExpenseFormDataInput } from './components/ExpenseForm';
+import { ExpenseList } from './components/ExpenseList';
 
 function App() {
+  const [expenses, setExpenses] = useState<Expense[]>([]);
+
+  const handleAddExpense = (expenseData: ExpenseFormDataInput) => {
+    const newExpense: Expense = {
+      id: crypto.randomUUID(),
+      ...expenseData,
+    };
+    setExpenses((prev) => [newExpense, ...prev]);
+  };
+
+  const handleDeleteExpense = (id: string) => {
+    setExpenses((prev) => prev.filter((expense) => expense.id !== id));
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -13,12 +30,13 @@ function App() {
           </p>
         </header>
 
-        <main>
-          <ExpenseForm />
+        <main className="space-y-8">
+          <ExpenseForm onAddExpense={handleAddExpense} />
+          <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense} />
         </main>
       </div>
     </div>
   );
 }
 
-export default App
+export default App;
