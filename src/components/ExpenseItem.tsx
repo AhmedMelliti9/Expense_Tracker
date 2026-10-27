@@ -1,4 +1,5 @@
 import type { Expense } from '../types/expense';
+import { formatCurrency } from '../utils/formatCurrency';
 
 interface ExpenseItemProps {
   expense: Expense;
@@ -37,7 +38,7 @@ export function ExpenseItem({ expense, onDelete }: ExpenseItemProps) {
       <div className="flex items-center justify-between sm:justify-end gap-4">
         <div className="text-right">
           <span className="text-base sm:text-lg font-bold text-slate-900">
-            ${expense.amount.toFixed(2)}
+            {formatCurrency(expense.amount)}
           </span>
         </div>
 
