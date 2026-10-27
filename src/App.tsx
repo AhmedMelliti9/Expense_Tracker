@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Expense } from './types/expense';
 import { ExpenseForm, type ExpenseFormDataInput } from './components/ExpenseForm';
 import { ExpenseList } from './components/ExpenseList';
+import { ExpenseSummary } from './components/ExpenseSummary';
 
 function App() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -32,6 +33,7 @@ function App() {
 
         <main className="space-y-8">
           <ExpenseForm onAddExpense={handleAddExpense} />
+          <ExpenseSummary expenses={expenses} />
           <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense} />
         </main>
       </div>
